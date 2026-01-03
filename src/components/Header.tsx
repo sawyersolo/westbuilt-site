@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import { brand, nav } from "@/lib/content";
 import clsx from "clsx";
+import Link from "next/link";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,29 +26,32 @@ export default function Header() {
           : "bg-transparent"
       )}
     >
-      <Container className="flex items-center justify-between py-4">
-        <a href="#" className="font-semibold tracking-tight text-ink-900">
-          {brand.name}
-        </a>
+<Container className="flex items-center justify-between py-4">
+  <Link
+    href="/"
+    className="font-semibold tracking-tight text-ink-900 hover:opacity-80 transition"
+  >
+    {brand.name}
+  </Link>
 
-        <nav className="hidden items-center gap-2 sm:flex">
-          {nav.map((item) =>
-            "cta" in item && item.cta ? (
-              <Button key={item.href} href={item.href}>
-                {item.label}
-              </Button>
-            ) : (
-              <Button key={item.href} href={item.href} variant="ghost">
-                {item.label}
-              </Button>
-            )
-          )}
-        </nav>
+  <nav className="hidden items-center gap-2 sm:flex">
+    {nav.map((item) =>
+      "cta" in item && item.cta ? (
+        <Button key={item.href} href={item.href}>
+          {item.label}
+        </Button>
+      ) : (
+        <Button key={item.href} href={item.href} variant="ghost">
+          {item.label}
+        </Button>
+      )
+    )}
+  </nav>
 
-        <div className="sm:hidden">
-          <Button href="#start">Get started</Button>
-        </div>
-      </Container>
+  <div className="sm:hidden">
+    <Button href="/start">Get started</Button>
+  </div>
+</Container>
     </header>
   );
 }
